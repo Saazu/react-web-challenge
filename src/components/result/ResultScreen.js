@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./result.css";
 import ResultListItem from "./ResultListItem";
 
 function ResultScreen({ quiz }) {
@@ -6,17 +7,21 @@ function ResultScreen({ quiz }) {
   const { results, numCorrectAnswers } = getQuizResult();
   console.log(results, numCorrectAnswers);
 
+  /**
+   * @description returns a list of ResultListItem components
+   * @returns []
+   */
   function resultList() {
     return results.map(result => <ResultListItem result={result} />)
   }
 
   return (
     <div>
-      <h2>You scored {numCorrectAnswers}/{numQuestions}</h2>
-      <div>
+      <h2 className="result-header">You scored {numCorrectAnswers}/{numQuestions}</h2>
+      <table className="result-display">
         {resultList()}
-      </div>
-      <button onClick={playNewGame}>Play Again</button>
+      </table>
+      <button className="play-again-button" onClick={playNewGame}>PLAY AGAIN?</button>
     </div>
   )
 }

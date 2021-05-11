@@ -1,6 +1,7 @@
 import * as React from "react";
 
 function useQuiz() {
+  const [questionsLoading, setQuestionsLoading] = React.useState(true);
   const [questions, setQuestions] = React.useState([]);
   const [quizStage, setQuizStage] = React.useState("welcome-stage");
   const [userAnswers, setUserAnswers] = React.useState(Array(10).fill(0));
@@ -11,6 +12,7 @@ function useQuiz() {
     fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
       .then(response => response.json())
       .then(q => setQuestions(q.results))
+      .then(() => setQuestionsLoading(false))
       .catch(error => console.error(error))
   }, [numberOfGamesPlayed]);
 
@@ -46,7 +48,7 @@ function useQuiz() {
 
   /**
    * @description
-   * @returns 
+   * @returns { number, []}
    */
   function getQuizResult() {
     const results = [];
@@ -70,9 +72,13 @@ function useQuiz() {
   function playNewGame() {
     setNumberOfGamesPlayed(numberOfGamesPlayed + 1);
     setQuizStage("welcome-stage");
+    setQuestions([]);
+    setUserAnswers(Array(10).fill(0));
+    setCurrentQuestionIdex(0);
   }
 
   return {
+    questionsLoading,
     quizStage,
     userAnswers,
     currentQuestionIndex,

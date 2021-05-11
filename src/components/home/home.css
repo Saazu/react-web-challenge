@@ -1,0 +1,14 @@
+.begin-button {
+  margin-top: 5em;
+  border: none;
+  background: none;
+  font-size: larger;
+}
+
+.description {
+  margin-top: 6em;
+}
+
+.description > p {
+  margin: 4em 0 4em 0;
+}

@@ -1,0 +1,13 @@
+.answer-button {
+  background: none;
+  border: none;
+  font-size: large;
+  padding: 2em;
+  margin: 2em;
+}
+
+.question-container {
+  margin: 4em 0 2em 0;
+  padding: 3em;
+  border: 1px solid black;
+}
