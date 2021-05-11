@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import * as React from "react";
+import HomeScreen from "./components/HomeScreen";
+import QuizScreen from "./components/quiz/QuizScreen";
+import ResultScreen from "./components/result/ResultScreen";
+import useQuiz from "./hooks/useQuiz";
 
 function App() {
+
+  const quiz = useQuiz();
+
+
+  console.log(quiz.questions);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      { quiz.quizStage === "welcome-stage" ? <HomeScreen quiz={quiz} /> : null}
+      { quiz.quizStage === "quiz-started" ? <QuizScreen quiz={quiz} /> : null}
+      { quiz.quizStage === "quiz-completed" ? <ResultScreen quiz={quiz} /> : null}
     </div>
   );
 }
