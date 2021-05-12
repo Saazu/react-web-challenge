@@ -3,10 +3,8 @@ import "./result.css";
 import ResultListItem from "./ResultListItem";
 
 function ResultScreen({ quiz }) {
-  const { getQuizResult, numQuestions, playNewGame } = quiz;
-  const { results, numCorrectAnswers } = getQuizResult();
-  console.log(results, numCorrectAnswers);
-
+  const { getQuizResult, numQuestions, playNewGame, userAnswers } = quiz;
+  const { results, numCorrectAnswers } = getQuizResult(userAnswers);
   /**
    * @description returns a list of ResultListItem components
    * @returns []

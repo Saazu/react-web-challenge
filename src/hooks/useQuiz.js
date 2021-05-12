@@ -55,23 +55,34 @@ function useQuiz() {
   /**
    * @description changes the current question to the next question
    */
-  function changeQuestion() {
+  function loadNextQuestion() {
     setCurrentQuestionIdex(currentQuestionIndex + 1)
   }
 
+  /**
+   * @description records user's answer selection, loads next question and shows result if no more questions left
+   * @param {boolean} userAnswer 
+   */
   function handleAnswerSelection(userAnswer) {
     recordUserAnswer(currentQuestionIndex, userAnswer);
-    changeQuestion();
+    loadNextQuestion();
     if (currentQuestionIndex + 1 === numQuestions) {
       showResult();
     }
   }
 
+
+  /**
+   * @typedef Result
+   * @property {[]} results
+   * @property {number} numCorrectAnswers
+   */
+
   /**
    * @description
-   * @returns { number, []}
+   * @returns {Result}
    */
-  function getQuizResult() {
+  function getQuizResult(userAnswers) {
     const results = [];
     let numCorrectAnswers = 0;
 
