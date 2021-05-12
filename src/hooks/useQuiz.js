@@ -6,7 +6,7 @@ function useQuiz() {
   const [quizStage, setQuizStage] = React.useState("welcome-stage");
   const [userAnswers, setUserAnswers] = React.useState(Array(10).fill(0));
   const [currentQuestionIndex, setCurrentQuestionIdex] = React.useState(0);
-  const [numberOfGamesPlayed, setNumberOfGamesPlayed] = React.useState(0)
+  const [numberOfGamesPlayed, setNumberOfGamesPlayed] = React.useState(0);
 
   React.useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
@@ -40,6 +40,7 @@ function useQuiz() {
 
   const currentQuestion = questions[currentQuestionIndex];
   const numQuestions = questions.length;
+
   /**
    * 
    * @param {number} currentQuestionIndex 
@@ -48,7 +49,7 @@ function useQuiz() {
    */
   function recordUserAnswer(currentQuestionIndex, answerChoice) {
     const newAnswerArray = [...userAnswers];
-    newAnswerArray[currentQuestionIndex] = answerChoice
+    newAnswerArray[currentQuestionIndex] = answerChoice;
     setUserAnswers(newAnswerArray);
   }
 
@@ -56,7 +57,7 @@ function useQuiz() {
    * @description changes the current question to the next question
    */
   function loadNextQuestion() {
-    setCurrentQuestionIdex(currentQuestionIndex + 1)
+    setCurrentQuestionIdex(currentQuestionIndex + 1);
   }
 
   /**
@@ -71,13 +72,11 @@ function useQuiz() {
     }
   }
 
-
   /**
    * @typedef Result
    * @property {[]} results
    * @property {number} numCorrectAnswers
    */
-
   /**
    * @description
    * @returns {Result}
@@ -98,9 +97,12 @@ function useQuiz() {
     return {
       results,
       numCorrectAnswers
-    }
+    };
   }
 
+  /**
+   * @description start a new trivia quiz
+   */
   function playNewGame() {
     setNumberOfGamesPlayed(numberOfGamesPlayed + 1);
     showWelcomePage();

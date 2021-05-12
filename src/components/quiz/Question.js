@@ -28,10 +28,8 @@ function Question({ quiz }) {
       <p className="question-count">{currentQuestionIndex + 1} of {numQuestions}</p>
       <button className="answer-button" value="True" onClick={handleUserAnswerSelection}>True</button>
       <button className="answer-button" value="False" onClick={handleUserAnswerSelection}>False</button>
-
     </div>
-  )
-
+  );
 }
 
 export default Question;
