@@ -16,6 +16,7 @@ function useQuiz() {
       .catch(error => console.error(error))
   }, [numberOfGamesPlayed]);
 
+
   /**
    * 
    * @param {( 'welcome-stage' | 'quiz-started' | 'quiz-completed')} newQuizStage
@@ -23,6 +24,18 @@ function useQuiz() {
    */
   function changeQuizStage(newQuizStage) {
     setQuizStage(newQuizStage)
+  }
+
+  function startQuiz() {
+    changeQuizStage("quiz-started");
+  }
+
+  function showResult() {
+    changeQuizStage("quiz-completed");
+  }
+
+  function showWelcomePage() {
+    changeQuizStage("welcome-stage");
   }
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -46,6 +59,14 @@ function useQuiz() {
     setCurrentQuestionIdex(currentQuestionIndex + 1)
   }
 
+  function handleAnswerSelection(userAnswer) {
+    recordUserAnswer(currentQuestionIndex, userAnswer);
+    changeQuestion();
+    if (currentQuestionIndex + 1 === numQuestions) {
+      showResult();
+    }
+  }
+
   /**
    * @description
    * @returns { number, []}
@@ -56,9 +77,9 @@ function useQuiz() {
 
     for (let i = 0; i < questions.length; i++) {
       if (userAnswers[i] === questions[i].incorrect_answers[0]) {
-        results[i] = { question: questions[i].question, answerCorrect: false };
+        results[i] = { id: i, question: questions[i].question, answerCorrect: false };
       } else {
-        results[i] = { question: questions[i].question, answerCorrect: true };
+        results[i] = { id: i, question: questions[i].question, answerCorrect: true };
         numCorrectAnswers += 1;
       }
     }
@@ -71,7 +92,7 @@ function useQuiz() {
 
   function playNewGame() {
     setNumberOfGamesPlayed(numberOfGamesPlayed + 1);
-    setQuizStage("welcome-stage");
+    showWelcomePage();
     setQuestions([]);
     setUserAnswers(Array(10).fill(0));
     setCurrentQuestionIdex(0);
@@ -85,9 +106,9 @@ function useQuiz() {
     currentQuestion,
     questions,
     numQuestions,
-    changeQuizStage,
-    recordUserAnswer,
-    changeQuestion,
+    startQuiz,
+    showResult,
+    handleAnswerSelection,
     getQuizResult,
     playNewGame
   }

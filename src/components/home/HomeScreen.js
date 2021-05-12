@@ -3,13 +3,13 @@ import "./home.css";
 
 function HomeScreen({ quiz }) {
 
-  const { questionsLoading } = quiz;
+  const { questionsLoading, startQuiz } = quiz;
 
   /**
    * @description starts the quiz
    */
   function handleBeginClick() {
-    quiz.changeQuizStage("quiz-started");
+    startQuiz();
   }
 
   return (

@@ -9,9 +9,6 @@ function App() {
 
   const quiz = useQuiz();
 
-
-  console.log(quiz.questions);
-
   return (
     <div className="layout">
       <div className="content-container">

@@ -12,14 +12,16 @@ function ResultScreen({ quiz }) {
    * @returns []
    */
   function resultList() {
-    return results.map(result => <ResultListItem result={result} />)
+    return results.map(result => <ResultListItem key={result.id} result={result} />)
   }
 
   return (
     <div>
       <h2 className="result-header">You scored {numCorrectAnswers}/{numQuestions}</h2>
       <table className="result-display">
-        {resultList()}
+        <tbody>
+          {resultList()}
+        </tbody>
       </table>
       <button className="play-again-button" onClick={playNewGame}>PLAY AGAIN?</button>
     </div>
